@@ -52,7 +52,9 @@ class Question {
 	}
 
 	public function getOption($index) {
-		return $this->option[$index];
+		if ($index > sizeof($this->options)) return false;
+		if (!isset($this->options[$index])) return false;
+		return $this->options[$index];
 	}
 
 	public function setOption($index, $option) {

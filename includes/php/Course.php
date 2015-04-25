@@ -24,6 +24,10 @@ class Course {
 		$this->name = $name; 
 	}
 
+	public function getModule($moduleID) {
+		return $this->modules[$moduleID];
+	}
+
 	public function getModules() {
 		return $this->modules;
 	}
@@ -33,8 +37,10 @@ class Course {
 	}
 
 	public function setQuestions($questions) {
+		$modules = $this->modules;
 		foreach ($questions as $key => $question) {
-			$this->modules[$question->getModuleID()]->addQuestion($question);
+			$module = $modules[$question->getModuleID()];
+			$module->addQuestion($question);
 		}
 	}
 

@@ -27,11 +27,17 @@ if ($instructor->getCourse()->isPrepared()) {
 </head>
 
 <body>
-  <form onSubmit="submitAnswer('<?= $randomQuestion->getAnswer() ?>'); return false;">
+	<script>
+	var studentID = 1;
+	var courseID = 1;
+	var moduleID = <?= $randomQuestion->getModuleID() ?>;
+	</script>
+  	<form onSubmit="submitAnswer(studentID, courseID, moduleID, '<?= $randomQuestion->getAnswer() ?>'); return false;">
       
         <h1><?= $instructor->getCourse()->getName() ?></h1>
            
-      	<legend>Question <span class="number"><?= $randomQuestion->getNumber() ?></span></legend>
+      	<legend><?PHP $modules = $instructor->getCourse()->getModules(); echo $modules[$randomQuestion->getModuleID()]->getName(); ?>: Question <span class="number"><?= $randomQuestion->getNumber() ?></span></legend>
+      	<br />
       	<?= $randomQuestion->getQuestionText() ?>
       	<br />
       	<br />
@@ -51,6 +57,7 @@ if ($instructor->getCourse()->isPrepared()) {
         <div class="wrapper">
         	<button id="answerButton">Answer</button><button id="nextButton" onClick="nextQuestion(); return false;">Next</button>
         </div>
-      </form>
+    </form>	
+
 </body>
 </html>

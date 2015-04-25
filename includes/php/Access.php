@@ -1,10 +1,10 @@
 <?php
 
-require_once('includes/php/Database.php'); 
-require_once('includes/php/Course.php'); 
-require_once('includes/php/Module.php'); 
-require_once('includes/php/Question.php'); 
-require_once('includes/php/FormatUtils.php'); 
+require_once('Database.php'); 
+require_once('Course.php'); 
+require_once('Module.php'); 
+require_once('Question.php'); 
+require_once('FormatUtils.php'); 
 
 class Access {
 
@@ -43,7 +43,7 @@ class Access {
 			$module->setID($record['ID']);
 			$module->setName($record['name']);
 			$module->setNumber($record['number']);
-			$modules[] = $module;
+			$modules[$record['ID']] = $module;
 		}
 		$this->database->close();
 		return $modules;
@@ -61,7 +61,7 @@ class Access {
 			$question->setModuleID($record['moduleID']);
 			$question->setNumber($record['number']);
 			$question->setExhibit($record['exhibit']);
-			$question->setQuestionText($this->formatter->formatCode($record['questionText']));
+			$question->setQuestionText($record['questionText']);
 			$question->setOption(1, $record['option1']);
 			$question->setOption(2, $record['option2']);
 			if ($record['option3'] != "") $question->setOption(3, $record['option3']);
@@ -72,20 +72,53 @@ class Access {
 			if ($record['option8'] != "") $question->setOption(8, $record['option8']);
 			$question->setAnswer($record['answer']);
 			$question->setExplanation($record['explanation']);
-			$questions[] = $question;
+			$questions[$record['number']] = $question;
 		}
 		$this->database->close();
 		return $questions;
 	}
 
-
-
-	public function setResponse() {
+	public function setQuestion($question) {
+		// if ($this->getQuestion(1, $question->moduleID, $question->getNumber()) != false) return false;
+		if ($this->debug == true) echo "<br />Access Call: " . __FUNCTION__;
 		$this->database->connect();
-		$query = "insert into history (studentID, courseID, moduleID, questionID, response, correct) values (1, 1, 1, 1, 1, 1)";
-		mail('mail@michaelodonnell.ie', 'My Subject', $query);
-		$rows = $this->db->query($query);
+		if ($this->debug == true) {
+			echo "<pre>Setting Question: ";
+			print_r($question);
+			echo "</pre>";
+		}
+		$data['courseID'] = 1;
+		$data['moduleID'] = $question->getModuleID();
+		$data['number'] = $question->getNumber();
+		$data['questionText'] = $question->getQuestionText();
+		$data['option1'] = $question->getOption(1);
+		$data['option2'] = $question->getOption(2);
+		$data['option3'] = $question->getOption(3);
+		$data['option4'] = $question->getOption(4);
+		$data['option5'] = $question->getOption(5);
+		$data['option6'] = $question->getOption(6);
+		$data['option7'] = $question->getOption(7);
+		$data['option8'] = $question->getOption(8);
+		$data['answer'] = $question->getAnswer();
+		$data['explanation'] = $question->getExplanation();
+		$question->setID($rows = $this->database->insert("questions", $data));
 		$this->database->close();
+		return $question;
+	}
+
+	public function deleteQuestion($questionID) {
+		$this->database->connect();
+		$query = $rows = $this->database->delete('questions', 'ID=' . $questionID);
+		$this->database->close();
+		return $query;
+	}
+
+	public function setResponse($studentID, $courseID, $moduleID, $response, $correct) {
+		$this->database->connect();
+		$query = "insert into history (studentID, courseID, moduleID, questionID, response, correct) values ($studentID, $courseID, $moduleID, 1, '$response', $correct)";
+		$rows = $this->database->query($query);
+		$this->database->close();
+		return $query;
 	}
 
 }

@@ -187,7 +187,7 @@ class Database {
     # desc: does an insert query with an array
     # param: table (no prefix), assoc array with data
     # returns: id of inserted record, false if error
-    function query_insert($table, $data) {
+    function insert($table, $data) {
         $q="INSERT INTO `".$this->pre.$table."` ";
         $v=''; $n='';
     
@@ -244,7 +244,7 @@ class Database {
     # desc: does a delete query with an array
     # param: table (no prefix), assoc array with data (doesn't need escaped), where condition
     # returns: (query_id) for fetching results etc
-    function query_delete($table, $where='1') {
+    function delete($table, $where='1') {
         $q="DELETE FROM ".$this->pre.$table;
         $q = rtrim($q, ', ') . ' WHERE '.$where.';';
     

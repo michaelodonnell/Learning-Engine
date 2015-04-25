@@ -1,7 +1,8 @@
-function submitAnswer(answer) {
+function submitAnswer(studentID, courseID, moduleID, answer) {
 	var options = $('#options :checkbox:checked');
 	var correct = true;
 	var answer = answer.split(',');
+	var response = '';
 
 	// Check at least one option has been ticked:
 	if (options.length == 0) return false;
@@ -12,6 +13,11 @@ function submitAnswer(answer) {
 
 	// Check if the correct options were ticked:
 	$(options).each(function(){
+		if (response == '') {
+			response = this.name;
+		} else {
+			response = response.concat(', ' + this.name);
+		}
 		if (answer.indexOf(this.name) < 0) correct = false;
 	});
 
@@ -22,15 +28,15 @@ function submitAnswer(answer) {
 	displayTheAnswer(correct);
 
 	// Save the response:
-	saveTheResponse(options, correct);
+	saveTheResponse(studentID, courseID, moduleID, response, correct);
 }
 
-function saveTheResponse(options, correct) {
+function saveTheResponse(studentID, courseID, moduleID, response, correct) {
 	$(document).ready(function(){
         $.ajax({
             url: 'includes/ajax/saveTheAnswer.php',
             dataType: 'text',
-            data: "options=" + options + "correct=" + correct,
+            data: "studentID=" + studentID + "&courseID=" + courseID + "&moduleID=" + moduleID + "&response=" + response + "&correct=" + correct,
             success: function(data) {
             	// Do something with the response:
             	alert(data);
@@ -45,4 +51,8 @@ function displayTheAnswer(correct) {
 	} else {
 		$('#incorrect').show();
 	}
+}
+
+function addQuestion() {
+	alert(1);
 }

@@ -1,8 +1,7 @@
 <?PHP
 
-require_once __DIR__ . '\..\php\Access.php'; 
+require_once '\..\php\Access.php'; 
 $access = New Access();
-$access->setResponse();
-echo 1;
+echo $access->setResponse($_REQUEST['studentID'], $_REQUEST['courseID'], $_REQUEST['moduleID'], $_REQUEST['response'], $_REQUEST['correct']);
 
 ?>

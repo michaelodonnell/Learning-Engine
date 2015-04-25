@@ -31,12 +31,24 @@ class Module {
 		$this->number = $number; 
 	}
 
+	public function getQuestion($questionID) {
+		return $this->questions[$questionID];
+	}
+
+	public function setQuestion($question) {
+		$this->questions[$question->getNumber()] = $question; 
+	}
+
 	public function getQuestions() {
 		return $this->questions;
 	}
 
 	public function addQuestion($question) {
-		$this->questions[] = $question;
+		$this->questions[$question->getID()] = $question;
+	}
+
+	public function removeQuestion($questionID) {
+		unset($this->questions[$questionID]);
 	}
 
 }
