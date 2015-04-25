@@ -38,9 +38,11 @@ class Course {
 
 	public function setQuestions($questions) {
 		$modules = $this->modules;
-		foreach ($questions as $key => $question) {
-			$module = $modules[$question->getModuleID()];
-			$module->addQuestion($question);
+		foreach ($questions as $moduleID => $moduleQuestions) {
+			foreach ($moduleQuestions as $questionNumber => $question) {
+				$module = $modules[$moduleID];
+				$module->addQuestion($question);
+			}
 		}
 	}
 

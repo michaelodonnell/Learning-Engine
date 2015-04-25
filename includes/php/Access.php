@@ -72,7 +72,7 @@ class Access {
 			if ($record['option10'] != "") $question->setOption(10, $record['option10']);
 			$question->setAnswer($record['answer']);
 			$question->setExplanation($record['explanation']);
-			$questions[$record['number']] = $question;
+			$questions[$record['moduleID']][$record['number']] = $question;
 		}
 		$this->database->close();
 		return $questions;
