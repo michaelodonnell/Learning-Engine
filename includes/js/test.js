@@ -39,7 +39,7 @@ function saveTheResponse(studentID, courseID, moduleID, response, correct) {
             data: "studentID=" + studentID + "&courseID=" + courseID + "&moduleID=" + moduleID + "&response=" + response + "&correct=" + correct,
             success: function(data) {
             	// Do something with the response:
-            	alert(data);
+            	// alert(data);
             }
         });
    });
