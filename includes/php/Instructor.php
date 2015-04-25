@@ -52,13 +52,13 @@ class Instructor {
 			}
 
 			$questions = $module->getQuestions();
+			$questionKeys = array_keys($questions);
 
-			if (sizeof($module->getQuestions()) > 1) {
-				$questionKeys = array_keys($questions);
+			if (sizeof($questionKeys) > 1) {
 				$index = $questionKeys[rand(0, sizeof($questionKeys) - 1)];
 				$question = $questions[$index];
 			} else {
-				if (sizeof($module->getQuestions()) == 1) $question = $questions[0];
+				if (sizeof($questionKeys) == 1) $question = $questions[$questionKeys[0]];
 			}
 
 			if ($question != null) return $question;
