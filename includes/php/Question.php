@@ -72,7 +72,7 @@ class Question {
 	}
 
 	public function setAnswer($answer) {
-		$this->answer = $answer; 
+		$this->answer = str_replace(" ", "", $answer); 
 	}
 
 	public function getExplanation() {
