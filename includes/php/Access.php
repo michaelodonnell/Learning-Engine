@@ -68,6 +68,8 @@ class Access {
 			if ($record['option6'] != "") $question->setOption(6, $record['option6']);
 			if ($record['option7'] != "") $question->setOption(7, $record['option7']);
 			if ($record['option8'] != "") $question->setOption(8, $record['option8']);
+			if ($record['option9'] != "") $question->setOption(9, $record['option9']);
+			if ($record['option10'] != "") $question->setOption(10, $record['option10']);
 			$question->setAnswer($record['answer']);
 			$question->setExplanation($record['explanation']);
 			$questions[$record['number']] = $question;
@@ -98,8 +100,13 @@ class Access {
 		$data['option6'] = $question->getOption(6);
 		$data['option7'] = $question->getOption(7);
 		$data['option8'] = $question->getOption(8);
+		$data['option9'] = $question->getOption(9);
+		$data['option10'] = $question->getOption(10);
 		$data['answer'] = $question->getAnswer();
 		$data['explanation'] = $question->getExplanation();
+
+print_r($data);
+
 		$question->setID($rows = $this->database->insert("questions", $data));
 		$this->database->close();
 		return $question;

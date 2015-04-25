@@ -19,6 +19,8 @@ class Editor {
 		$question->setOption(6, $this->clean($_POST['option6']));
 		$question->setOption(7, $this->clean($_POST['option7']));
 		$question->setOption(8, $this->clean($_POST['option8']));
+        $question->setOption(9, $this->clean($_POST['option9']));
+        $question->setOption(10, $this->clean($_POST['option10']));
 		$question->setAnswer($this->clean($_POST['answer']));
 		$question->setExplanation($this->clean($_POST['explanation']));
 

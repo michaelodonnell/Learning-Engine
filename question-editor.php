@@ -44,7 +44,7 @@ if( isset($_GET['moduleID']) && !isset($_GET['questionID']) ) {
   	Question Text: 
   	<textarea rows="20" cols="50" name="questionText"><?PHP if ($mode == "edit") echo $question->getQuestionText(); ?></textarea>
   	<br>
-    <?PHP for ($x = 1; $x <= 8; $x++) { ?>
+    <?PHP for ($x = 1; $x <= 10; $x++) { ?>
   	Option <?= $x ?>:
     <textarea rows="5" cols="50" name="option<?= $x ?>"><?PHP if ($mode == "edit") echo htmlentities($question->getOption($x)); ?></textarea>
   	<br>
