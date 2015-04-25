@@ -38,14 +38,14 @@ if ($instructor->getCourse()->isPrepared()) {
       
         <h1><?= $instructor->getCourse()->getName() ?></h1>
            
-      	<legend>Question <span class="number"><?= $randomQuestion->getNumber() ?></span> <?PHP $modules = $instructor->getCourse()->getModules(); echo $modules[$randomQuestion->getModuleID()]->getName(); ?></legend>
+      	<legend><?PHP $modules = $instructor->getCourse()->getModules(); echo $modules[$randomQuestion->getModuleID()]->getName(); ?>: Question <span class="number"><?= $randomQuestion->getNumber() ?></span></legend>
       	<br />
       	<?= $instructor->getFormatter()->displayHTML($randomQuestion->getQuestionText()) ?>
       	<br />
       	<br />
         <fieldset id="options">
       	<?PHP foreach ($randomQuestion->getAllOptions() as $key => $option) { ?>
-      		<?= $key ?>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="<?= $key ?>"><label class="light" for="development"><?= $option ?></label><br>
+      		<?= $key ?>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="<?= $key ?>"><label class="light" for="development"><?= $instructor->getFormatter()->displayHTML($option) ?></label><br>
 	  	<?PHP } ?>
         </fieldset>
       	<br />
