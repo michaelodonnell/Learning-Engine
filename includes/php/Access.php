@@ -4,7 +4,6 @@ require_once('Database.php');
 require_once('Course.php'); 
 require_once('Module.php'); 
 require_once('Question.php'); 
-require_once('FormatUtils.php'); 
 
 class Access {
 
@@ -15,7 +14,6 @@ class Access {
 
 	function Access() {
 		$this->database = new Database();
-		$this->formatter = new FormatUtils();
 	}
 
 	public function getCourse($ID) {

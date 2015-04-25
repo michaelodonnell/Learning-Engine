@@ -1,5 +1,7 @@
 <?php
 
+require_once('FormatUtils.php'); 
+
 class Question {
 
 	private $ID;

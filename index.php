@@ -38,7 +38,7 @@ if ($instructor->getCourse()->isPrepared()) {
            
       	<legend><?PHP $modules = $instructor->getCourse()->getModules(); echo $modules[$randomQuestion->getModuleID()]->getName(); ?>: Question <span class="number"><?= $randomQuestion->getNumber() ?></span></legend>
       	<br />
-      	<?= $randomQuestion->getQuestionText() ?>
+      	<?= $instructor->getFormatter()->displayHTML($randomQuestion->getQuestionText()) ?>
       	<br />
       	<br />
         <fieldset id="options">

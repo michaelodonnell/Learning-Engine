@@ -2,10 +2,10 @@
 
 class FormatUtils {
 
-	public function formatCode($code) {
-		$code = nl2br($code);
-		$code = preg_replace('/[ ](?=[^>]*(?:<|$))/', '&nbsp', $code);
-		return $code;
+	public function displayHTML($text) {
+		$text = nl2br($text);
+		$text = preg_replace('/[ ](?=[^>]*(?:<|$))/', '&nbsp', $text);
+		return $text;
 	}
 
 }

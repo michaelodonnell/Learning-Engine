@@ -9,11 +9,13 @@ class Instructor {
 	private $access;
 	private $course;
 	private $editor;
+	private $formatter;
 
 	function Instructor() {
 		$this->access = New Access();
 		$this->course = New Course();
 		$this->editor = New Editor();
+		$this->formatter = new FormatUtils();
 	}
 
 	public function getCourse($ID = null) {
@@ -52,7 +54,8 @@ class Instructor {
 			$questions = $module->getQuestions();
 
 			if (sizeof($module->getQuestions()) > 1) {
-				$index = rand(0, sizeof($module->getQuestions()) - 1);
+				$questionKeys = array_keys($questions);
+				$index = $questionKeys[rand(0, sizeof($questionKeys) - 1)];
 				$question = $questions[$index];
 			} else {
 				if (sizeof($module->getQuestions()) == 1) $question = $questions[0];
@@ -81,6 +84,10 @@ class Instructor {
 		$module = $this->course->getModule($_POST['moduleID']);
 		$module->removeQuestion($_POST['oldQuestionID']);
 		$module->setQuestion($question);
+	}
+
+	public function getFormatter() {
+		return $this->formatter;
 	}
 
 }
