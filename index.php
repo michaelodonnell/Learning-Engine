@@ -9,6 +9,7 @@ $instructor->prepareCourse();
 // $instructor->printCourseModel();
 if ($instructor->getCourse()->isPrepared()) {
 	$randomQuestion = $instructor->askRandomQuestion();
+  // $randomQuestion = $instructor->getCourse()->getModule(3)->getQuestion(41);
 }
 
 ?>
@@ -36,7 +37,7 @@ if ($instructor->getCourse()->isPrepared()) {
       
         <h1><?= $instructor->getCourse()->getName() ?></h1>
            
-      	<legend><?PHP $modules = $instructor->getCourse()->getModules(); echo $modules[$randomQuestion->getModuleID()]->getName(); ?>: Question <span class="number"><?= $randomQuestion->getNumber() ?></span></legend>
+      	<legend>Question <span class="number"><?= $randomQuestion->getNumber() ?></span> <?PHP $modules = $instructor->getCourse()->getModules(); echo $modules[$randomQuestion->getModuleID()]->getName(); ?></legend>
       	<br />
       	<?= $instructor->getFormatter()->displayHTML($randomQuestion->getQuestionText()) ?>
       	<br />
@@ -55,7 +56,7 @@ if ($instructor->getCourse()->isPrepared()) {
       		</div>
       	</div>
         <div class="wrapper">
-        	<button id="answerButton">Answer</button><button id="nextButton" onClick="nextQuestion(); return false;">Next</button>
+        	<button id="answerButton">Answer</button><button id="nextButton" onClick="location.reload(); return false;">Next</button>
         </div>
     </form>	
 
