@@ -44,22 +44,11 @@ if( isset($_GET['moduleID']) && !isset($_GET['questionID']) ) {
   	Question Text: 
   	<textarea rows="20" cols="50" name="questionText"><?PHP if ($mode == "edit") echo $question->getQuestionText(); ?></textarea>
   	<br>
-  	Option 1: <input style="width: 90%;" type="text" name="option1" value="<?PHP if ($mode == "edit") echo htmlentities($question->getOption(1)); ?>" />
+    <?PHP for ($x = 1; $x <= 8; $x++) { ?>
+  	Option <?= $x ?>:
+    <textarea rows="3" cols="50" name="option<?= $x ?>"><?PHP if ($mode == "edit") echo htmlentities($question->getOption($x)); ?></textarea>
   	<br>
-  	Option 2: <input style="width: 90%;" type="text" name="option2" value="<?PHP if ($mode == "edit") echo htmlentities($question->getOption(2)); ?>" />
-  	<br>
-  	Option 3: <input style="width: 90%;" type="text" name="option3" value="<?PHP if ($mode == "edit") echo htmlentities($question->getOption(3)); ?>" />
-  	<br>
-  	Option 4: <input style="width: 90%;" type="text" name="option4" value="<?PHP if ($mode == "edit") echo htmlentities($question->getOption(4)); ?>" />
-  	<br>
-  	Option 5: <input style="width: 90%;" type="text" name="option5" value="<?PHP if ($mode == "edit") echo htmlentities($question->getOption(5)); ?>" />
-  	<br>
-  	Option 6: <input style="width: 90%;" type="text" name="option6" value="<?PHP if ($mode == "edit") echo htmlentities($question->getOption(6)); ?>" />
-  	<br>
-  	Option 7: <input style="width: 90%;" type="text" name="option7" value="<?PHP if ($mode == "edit") echo htmlentities($question->getOption(7)); ?>" />
-  	<br>
-  	Option 8: <input style="width: 90%;" type="text" name="option8" value="<?PHP if ($mode == "edit") echo htmlentities($question->getOption(8)); ?>" />
-  	<br>
+    <?PHP } ?>
   	Answer: eg "1,2,4" <input style="width: 250px;" type="text" name="answer" value="<?PHP if ($mode == "edit") echo htmlentities($question->getAnswer()); ?>">
   	<br>
   	Explanation: 
