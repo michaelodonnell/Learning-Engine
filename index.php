@@ -32,8 +32,9 @@ if ($instructor->getCourse()->isPrepared()) {
 	var studentID = 1;
 	var courseID = 1;
 	var moduleID = <?= $randomQuestion->getModuleID() ?>;
+  var questionID = <?= $randomQuestion->getID() ?>;
 	</script>
-  	<form onSubmit="submitAnswer(studentID, courseID, moduleID, '<?= $randomQuestion->getAnswer() ?>'); return false;">
+  	<form onSubmit="submitAnswer(studentID, courseID, moduleID, questionID, '<?= $randomQuestion->getAnswer() ?>'); return false;">
       
         <h1><?= $instructor->getCourse()->getName() ?></h1>
            

@@ -80,7 +80,7 @@ class Instructor {
 	public function resetQuestion() {
 		$this->access->deleteQuestion($_POST['oldQuestionID']);
 		$question = $this->editor->setQuestion();
-		$question = $this->access->setQuestion($question);
+		$question = $this->access->setQuestion($question, $_POST['oldQuestionID']);
 		$module = $this->course->getModule($_POST['moduleID']);
 		$module->removeQuestion($_POST['oldQuestionID']);
 		$module->setQuestion($question);

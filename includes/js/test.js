@@ -1,4 +1,4 @@
-function submitAnswer(studentID, courseID, moduleID, answer) {
+function submitAnswer(studentID, courseID, moduleID, questionID, answer) {
 	var options = $('#options :checkbox:checked');
 	var correct = true;
 	var answer = answer.split(',');
@@ -28,15 +28,15 @@ function submitAnswer(studentID, courseID, moduleID, answer) {
 	displayTheAnswer(correct);
 
 	// Save the response:
-	saveTheResponse(studentID, courseID, moduleID, response, correct);
+	saveTheResponse(studentID, courseID, moduleID, questionID, response, correct);
 }
 
-function saveTheResponse(studentID, courseID, moduleID, response, correct) {
+function saveTheResponse(studentID, courseID, moduleID, questionID, response, correct) {
 	$(document).ready(function(){
         $.ajax({
             url: 'includes/ajax/saveTheAnswer.php',
             dataType: 'text',
-            data: "studentID=" + studentID + "&courseID=" + courseID + "&moduleID=" + moduleID + "&response=" + response + "&correct=" + correct,
+            data: "studentID=" + studentID + "&courseID=" + courseID + "&moduleID=" + moduleID + "&questionID=" + questionID + "&response=" + response + "&correct=" + correct,
             success: function(data) {
             	// Do something with the response:
             	// alert(data);

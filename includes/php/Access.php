@@ -76,7 +76,7 @@ class Access {
 		return $questions;
 	}
 
-	public function setQuestion($question) {
+	public function setQuestion($question, $oldQuestionID = null) {
 		// if ($this->getQuestion(1, $question->moduleID, $question->getNumber()) != false) return false;
 		if ($this->debug == true) echo "<br />Access Call: " . __FUNCTION__;
 		$this->database->connect();
@@ -87,6 +87,7 @@ class Access {
 		}
 		$data['courseID'] = 1;
 		$data['moduleID'] = $question->getModuleID();
+		if ($oldQuestionID != null) $data['ID'] = $oldQuestionID;
 		$data['number'] = $question->getNumber();
 		$data['questionText'] = $question->getQuestionText();
 		$data['option1'] = $question->getOption(1);
@@ -111,9 +112,9 @@ class Access {
 		return $query;
 	}
 
-	public function setResponse($studentID, $courseID, $moduleID, $response, $correct) {
+	public function setResponse($studentID, $courseID, $moduleID, $questionID, $response, $correct) {
 		$this->database->connect();
-		$query = "insert into history (studentID, courseID, moduleID, questionID, response, correct) values ($studentID, $courseID, $moduleID, 1, '$response', $correct)";
+		$query = "insert into history (studentID, courseID, moduleID, questionID, response, correct) values ($studentID, $courseID, $moduleID, $questionID, '$response', $correct)";
 		$rows = $this->database->query($query);
 		$this->database->close();
 		return $query;
