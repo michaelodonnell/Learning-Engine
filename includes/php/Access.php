@@ -105,14 +105,14 @@ class Access {
 		$data['answer'] = $question->getAnswer();
 		$data['explanation'] = $question->getExplanation();
 
-print_r($data);
-
 		$question->setID($rows = $this->database->insert("questions", $data));
 		$this->database->close();
 		return $question;
 	}
 
 	public function deleteQuestion($questionID) {
+		if ($this->debug == true) echo "<br />Access Call: " . __FUNCTION__;
+		if ($this->debug == true) echo "<br />Deleting Question: " . $questionID;
 		$this->database->connect();
 		$query = $rows = $this->database->delete('questions', 'ID=' . $questionID);
 		$this->database->close();
@@ -120,8 +120,9 @@ print_r($data);
 	}
 
 	public function setResponse($studentID, $courseID, $moduleID, $questionID, $response, $correct) {
+		if ($this->debug == true) echo "<br />Access Call: " . __FUNCTION__;
 		$this->database->connect();
-		$query = "insert into history (studentID, courseID, moduleID, questionID, response, correct) values ($studentID, $courseID, $moduleID, $questionID, '$response', $correct)";
+		$query = "insert into history (studentID, courseID, moduleID, questionID, response, correct) values ($studentID, $courseID, $moduleID, $questionID, '$response', $correct)";		
 		$rows = $this->database->query($query);
 		$this->database->close();
 		return $query;
